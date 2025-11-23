@@ -1,61 +1,5 @@
 // Данные вопросов с названиями и полными вопросами
-// Функции для полноэкранного режима PDF
-function toggleFullscreen() {
-    const container = document.querySelector('.pdf-container');
-    
-    if (!document.fullscreenElement) {
-        enterFullscreen(container);
-    } else {
-        exitFullscreen();
-    }
-}
 
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    }
-}
-
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-    }
-}
-
-// Обновляем кнопку при изменении полноэкранного режима
-document.addEventListener('fullscreenchange', updateFullscreenButton);
-document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-document.addEventListener('msfullscreenchange', updateFullscreenButton);
-
-function updateFullscreenButton() {
-    const btn = document.querySelector('.fullscreen-btn');
-    if (document.fullscreenElement) {
-        btn.textContent = '✕ Выйти';
-        btn.style.background = 'linear-gradient(135deg, #EF4444, #DC2626)';
-        // Прячем остальной контент
-        document.querySelector('.container').style.filter = 'blur(5px)';
-    } else {
-        btn.textContent = '⛶ Полный экран';
-        btn.style.background = 'linear-gradient(135deg, #8B5FBF, #6A0DAD)';
-        // Возвращаем нормальный вид
-        document.querySelector('.container').style.filter = 'none';
-    }
-}
-
-// Выход по Escape
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.fullscreenElement) {
-        exitFullscreen();
-    }
-});
 const questions = [
     {
         id: 1,
@@ -319,4 +263,5 @@ function addResetButton() {
 document.addEventListener('DOMContentLoaded', () => {
     createCards();
     addResetButton();
+
 });
