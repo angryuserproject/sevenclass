@@ -448,3 +448,212 @@ h1 {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
 }
+/* Кнопка сброса статусов */
+.reset-btn {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 auto 30px;
+    display: block;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.reset-btn:hover {
+    background: linear-gradient(135deg, #F87171, #EF4444);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+}
+.fullscreen-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #8B5FBF, #6A0DAD);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+    z-index: 1000; /* Увеличиваем z-index */
+}
+
+.fullscreen-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(106, 13, 173, 0.4);
+}
+
+/* Стили для полноэкранного режима */
+:fullscreen .pdf-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+}
+
+:fullscreen #pdfFrame {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+}
+
+:fullscreen .fullscreen-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+}
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1800px;
+        padding: 50px 40px;
+    }
+    
+    h1 {
+        font-size: 4em;
+        margin-bottom: 60px;
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 35px;
+    }
+    
+    .card {
+        padding: 40px;
+        border-radius: 25px;
+    }
+    
+    .card h3 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+    
+    .card p {
+        font-size: 1.2em;
+    }
+    
+    .card-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1em;
+    }
+    
+    /* Увеличиваем модальное окно */
+    .modal-content {
+        max-width: 1200px;
+        padding: 50px;
+    }
+    
+    .question-content h2 {
+        font-size: 2.5em;
+        margin-bottom: 40px;
+    }
+    
+    .question-text p {
+        font-size: 1.6em;
+    }
+    
+    .answer p {
+        font-size: 1.4em;
+    }
+    
+    .show-answer-btn, .action-btn {
+        padding: 20px 35px;
+        font-size: 1.3em;
+        min-width: 250px;
+    }
+    
+    /* Увеличиваем PDF просмотр */
+    .pdf-container {
+        max-width: 1200px;
+    }
+    
+    #pdfFrame {
+        height: 700px;
+    }
+    
+    .fullscreen-btn {
+        padding: 15px 25px;
+        font-size: 1.2em;
+    }
+}
+
+/* Для очень больших экранов (4K и больше) */
+@media (min-width: 2560px) {
+    .container {
+        max-width: 2200px;
+    }
+    
+    h1 {
+        font-size: 5em;
+    }
+    
+    .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 45px;
+    }
+    
+    .card {
+        padding: 50px;
+    }
+    
+    .card h3 {
+        font-size: 2.2em;
+    }
+    
+    .modal-content {
+        max-width: 1500px;
+    }
+}
+
+/* Улучшаем читаемость для больших расстояний */
+@media (min-width: 1200px) {
+    body {
+        font-size: 18px; /* Увеличиваем базовый размер шрифта */
+    }
+    
+    .card h3 {
+        font-weight: 700; /* Делаем жирнее для лучшей видимости */
+    }
+}
+/* Высокий контраст для проекторов */
+@media (min-width: 1920px) {
+    .card {
+        background: linear-gradient(145deg, #ffffff, #f8f8f8);
+        border: 2px solid rgba(106, 13, 173, 0.1);
+    }
+    
+    .card h3 {
+        color: #5a0a9c; /* Более темный фиолетовый */
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .show-answer-btn, .action-btn {
+        font-weight: 700;
+        border: 2px solid transparent;
+    }
+}
+
+/* Увеличиваем зоны клика для сенсорных досок */
+.card, .show-answer-btn, .action-btn, .fullscreen-btn {
+    min-height: 44px; /* Минимальный размер для касания */
+}
