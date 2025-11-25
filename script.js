@@ -1,5 +1,61 @@
 // Данные вопросов с названиями и полными вопросами
+// Функции для полноэкранного режима PDF
+function toggleFullscreen() {
+    const container = document.querySelector('.pdf-container');
+    
+    if (!document.fullscreenElement) {
+        enterFullscreen(container);
+    } else {
+        exitFullscreen();
+    }
+}
 
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+}
+
+// Обновляем кнопку при изменении полноэкранного режима
+document.addEventListener('fullscreenchange', updateFullscreenButton);
+document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+document.addEventListener('msfullscreenchange', updateFullscreenButton);
+
+function updateFullscreenButton() {
+    const btn = document.querySelector('.fullscreen-btn');
+    if (document.fullscreenElement) {
+        btn.textContent = '✕ Выйти';
+        btn.style.background = 'linear-gradient(135deg, #EF4444, #DC2626)';
+        // Прячем остальной контент
+        document.querySelector('.container').style.filter = 'blur(5px)';
+    } else {
+        btn.textContent = '⛶ Полный экран';
+        btn.style.background = 'linear-gradient(135deg, #8B5FBF, #6A0DAD)';
+        // Возвращаем нормальный вид
+        document.querySelector('.container').style.filter = 'none';
+    }
+}
+
+// Выход по Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.fullscreenElement) {
+        exitFullscreen();
+    }
+});
 const questions = [
     {
         id: 1,
@@ -57,39 +113,39 @@ const questions = [
     },
     {
         id: 10,
-        title: "Вопрос",
-        question: "Условие",
-        answer: "Ответ"
+        title: "Время радиосигнала",
+        question: "Расстояние до Марса во время великого противостояния составляет 55 000 000 км. Сколько времени будет идти радиосигнал до Марса со скоростью 300 000 км/с?",
+        answer: "183 секунды"
     },
     {
         id: 11,
-        title: "Вопрос",
-        question: "Условие",
-        answer: "Ответ"
+        title: "Расстояние до Веги",
+        question: "Звезда Вега находится на расстоянии 7,692 астрономических единиц от Земли. Рассчитайте это расстояние в километрах, если 1 а.е. = 150 000 000 км",
+        answer: "1 153 800 000 км"
     },
     {
         id: 12,
-        title: "Вопрос",
-        question: "Условие",
-        answer: "Ответ"
+        title: "Сравнение параллаксов",
+        question: "Параллакс Альфа Центавра 0,75″,а параллакс Проциона 0,286″. Во сколько раз Альфа Центавра ближе к Земле?",
+        answer: "в 2,62 раза"
     },
     {
         id: 13,
-        title: "Вопрос",
-        question: "Условие",
+        title: "Масса Юпитера",
+        question: "Один из спутников Юпитера, Ио, вращается вокруг планеты на среднем расстоянии 422000 км и делает полный оборот за 1.77 земных суток. Рассчитайте массу Юпитера. M(планеты)=(4 × π² × r³) / (G × t²). G=6.67*10⁻¹¹",
         answer: "Ответ"
     },
     {
         id: 14,
-        title: "Вопрос",
-        question: "Условие",
-        answer: "Ответ"
+        title: "Диаметр Луны",
+        question: "Диаметр Марса составляет примерно половину диаметра Земли. Диаметр Луны в 3.66 раза меньше диаметра Марса. Найдите диаметр Марса, если диаметр Земли равен 12742 км. Округлите до целых. Найдите диаметр Луны. Округлите до целых. Во сколько раз диаметр Земли больше диаметра Луны? Округлите до десятых",
+        answer: "Диаметр Марса 6371 км. Диаметр Луны 1740 км. Диаметр Земли больше диаметра Луны в 7.3 раза"
     },
     {
         id: 15,
-        title: "Вопрос",
-        question: "Условие",
-        answer: "Ответ"
+        title: "Расстояние до Урана и Нептуна",
+        question: "Уран совершает один оборот вокруг солнца за 84 земных года, а Нептун - за 165 лет. Во сколько раз среднее расстояние от Нептуна до Солнца больше, чем от Урана?Для нахождения используйте третий закон Кепплера: (T₁² / T₂²) = (a₁³ / a₂³), где T-период обращения, a-среднее расстояние до Солнца",
+        answer: "aН/аУ=∛3.857 ≈ 1.57"
     }
 ];
 
@@ -263,5 +319,4 @@ function addResetButton() {
 document.addEventListener('DOMContentLoaded', () => {
     createCards();
     addResetButton();
-
 });
